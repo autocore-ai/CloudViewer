@@ -75,21 +75,25 @@ jobs:
     if: needs.checklicense.outputs.is_unity_license_set == 'true'
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
+    outputs:
+      commit_message: ${{ steps.checkout.outputs.commit_message }}
     strategy:
       fail-fast: false
       matrix:
         targetPlatform:
           # - StandaloneOSX
           # - StandaloneWindows
-          - StandaloneWindows64
-          - StandaloneLinux64
+          # - StandaloneWindows64
+          # - StandaloneLinux64
           # - iOS
           # - Android
           - WebGL
     steps:
       - uses: actions/checkout@v2
+        id: checkout
         with:
           lfs: true
+        run: echo "::set-output name=commit_message::${{ github.event.head_commit.message }}"
       - uses: actions/cache@v2.1.3
         with:
           path: ${{ matrix.projectPath }}/Library
@@ -107,3 +111,19 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build
+  deploy:
+    needs: [build]
+    name: Deploy webgl contents to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: Build-WebGL
+          path: build
+      - uses: actions/checkout@v2
+        with:
+          ref: build
+      - run: |
+          echo $PWD
+          echo ${{ needs.build.outputs.commit_message }}
+          ls -alh
