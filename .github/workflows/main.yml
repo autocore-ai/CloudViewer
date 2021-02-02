@@ -126,4 +126,4 @@ jobs:
       - run: |
           echo $PWD
           echo ${{ needs.build.outputs.commit_message }}
-          ls -alh
+          ls WebGL -alh
