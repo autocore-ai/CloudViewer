@@ -116,18 +116,20 @@ jobs:
     name: Deploy webgl contents to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
         with:
           ref: build
-      - run: rm -rf Build
+          # persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          # fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+      - run: rm -rf Build TemplateData index.html
       - uses: actions/download-artifact@v2
         with:
           name: Build-WebGL
           path: .
       - run: |
           mv WebGL/WebGL/* .
-          git config user.name autocore-ci
-          git config user.email autocore-oss@github.com
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
           git add .
-          git commit -m "${{ needs.build.outputs.commit_message }}"
-          git push
+          git commit --amend -m "`date '+%Y-%m-%d-%H%M'` ${{ needs.build.outputs.commit_message }}"
+          git push -f
