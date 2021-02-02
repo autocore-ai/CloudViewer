@@ -76,7 +76,7 @@ jobs:
     name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
     runs-on: ubuntu-latest
     outputs:
-      commit_message: ${{ steps.checkout.outputs.commit_message }}
+      commit_message: ${{ steps.commit_message.outputs.commit_message }}
     strategy:
       fail-fast: false
       matrix:
@@ -90,9 +90,9 @@ jobs:
           - WebGL
     steps:
       - uses: actions/checkout@v2
-        id: checkout
         with:
           lfs: true
+      - id: commit_message
         run: echo "::set-output name=commit_message::${{ github.event.head_commit.message }}"
       - uses: actions/cache@v2.1.3
         with:
