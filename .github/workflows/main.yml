@@ -116,13 +116,13 @@ jobs:
     name: Deploy webgl contents to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: Build-WebGL
-          path: build
       - uses: actions/checkout@v2
         with:
           ref: build
+      - uses: actions/download-artifact@v2
+        with:
+          name: Build-WebGL
+          path: .
       - run: |
           echo $PWD
           echo ${{ needs.build.outputs.commit_message }}
