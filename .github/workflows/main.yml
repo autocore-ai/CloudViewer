@@ -119,11 +119,15 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: build
+      - run: rm -rf Build
       - uses: actions/download-artifact@v2
         with:
           name: Build-WebGL
           path: .
       - run: |
-          echo $PWD
-          echo ${{ needs.build.outputs.commit_message }}
-          ls WebGL -alh
+          mv WebGL/WebGL/* .
+          git config user.name autocore-ci
+          git config user.email autocore-oss@github.com
+          git add .
+          git commit -m "${{ needs.build.outputs.commit_message }}"
+          git push
