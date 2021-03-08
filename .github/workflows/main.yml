@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  UNITY_VERSION: 2020.2.2f1
+  UNITY_VERSION: 2020.2.7f1
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   PROJECT_PATH: .
 
@@ -34,7 +34,7 @@ jobs:
       - name: Request manual activation file
         id: getManualLicenseFile
         # https://github.com/game-ci/unity-request-activation-file/releases/
-        uses: game-ci/unity-request-activation-file@v2.0-alpha-1
+        uses: game-ci/unity-request-activation-file@v2
         with:
           unityVersion: ${{ env.UNITY_VERSION }}
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
@@ -105,7 +105,7 @@ jobs:
             Library-${{ matrix.projectPath }}-
             Library-
       # https://github.com/game-ci/unity-builder/releases/
-      - uses: game-ci/unity-builder@v2.0-alpha-6
+      - uses: game-ci/unity-builder@v2
         with:
           projectPath: ${{ env.PROJECT_PATH }}
           unityVersion: ${{ env.UNITY_VERSION }}
