@@ -116,7 +116,7 @@ jobs:
           path: build
   deploy:
     needs: [build]
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/develop'
     name: Deploy webgl contents to GitHub Pages
     runs-on: ubuntu-latest
     steps:
