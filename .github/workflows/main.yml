@@ -125,7 +125,7 @@ jobs:
           ref: build
           # persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           # fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - run: rm -rf Build TemplateData index.html
+      - run: rm -rf *
       - uses: actions/download-artifact@v2
         with:
           name: Build-WebGL
