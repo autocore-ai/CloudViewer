@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Packages/com.autocore.cloudviewer-ui/Scene/Test1.unity
-    guid: cb2cc11cd9ff95440bc2db5db91914d1
+    path: Assets/Scenes/CouldViewer.unity
+    guid: 02d83317b725fcc4f9fc01d538398739
   m_configObjects: {}
