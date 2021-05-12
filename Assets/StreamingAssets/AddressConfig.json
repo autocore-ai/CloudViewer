@@ -1,4 +1,4 @@
 {
-    "postTrafficAddress": "http://192.168.49.2:8000/rsu/rsu_id/traffic_light/rule_change",
-    "getTrafficAddress": "http://192.168.49.2:8000/rsu/**"
+    "postTrafficAddress": "http://192.168.10.183:8000/rsu/rsu_id/traffic_light/rule_change",
+    "getTrafficAddress": "http://192.168.10.183:8000/rsu/**"
 }
