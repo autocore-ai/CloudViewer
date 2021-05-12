@@ -17,9 +17,6 @@
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-      <div id="unity-mobile-warning">
-        WebGL builds are not supported on mobile devices.
-      </div>
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
@@ -28,15 +25,15 @@
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL.loader.js";
+      var loaderUrl = buildUrl + "/CloudViewer.loader.js";
       var config = {
-        dataUrl: buildUrl + "/WebGL.data",
-        frameworkUrl: buildUrl + "/WebGL.framework.js",
-        codeUrl: buildUrl + "/WebGL.wasm",
+        dataUrl: buildUrl + "/CloudViewer.data",
+        frameworkUrl: buildUrl + "/CloudViewer.framework.js",
+        codeUrl: buildUrl + "/CloudViewer.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "AutoCore",
         productName: "CloudViewer",
-        productVersion: "0.0.10",
+        productVersion: "0.0.11",
       };
 
       var container = document.querySelector("#unity-container");
@@ -44,15 +41,10 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-      var mobileWarning = document.querySelector("#unity-mobile-warning");
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         container.className = "unity-mobile";
         config.devicePixelRatio = 1;
-        mobileWarning.style.display = "block";
-        setTimeout(() => {
-          mobileWarning.style.display = "none";
-        }, 5000);
       } else {
         canvas.style.width = "960px";
         canvas.style.height = "600px";
