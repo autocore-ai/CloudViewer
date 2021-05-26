@@ -1,4 +1,0 @@
-{
-    "postTrafficAddress": "http://192.168.49.2:8080/rsu/rule_change",
-    "getTrafficAddress": "http://192.168.49.2:8000/rsu/**"
-}
